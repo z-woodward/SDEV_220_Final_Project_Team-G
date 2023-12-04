@@ -1,0 +1,118 @@
+<!-- 
+  @Author: Donald Osgood
+  @Date:   2023-11-22 22:26:55
+  @Last Modified by:   Donald Osgood
+  @Last Modified time: 2023-11-24 22:47:34
+-->
+<!-- HTML template -->
+<!-- templates/index.html -->
+{% extends "bootstrap/base.html" %}
+{% block html_attribs %} lang="en"{% endblock %}
+{% block title %}Restaurant Name Generator{% endblock %}
+{% block styles -%}
+    {{super()}}  
+    <style>
+.border-top { border-top: 1px solid #e5e5e5; }
+        .border-bottom { border-bottom: 1px solid #e5e5e5; }
+        .border-top-gray { border-top-color: #adb5bd; }
+        
+        .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+        
+        .lh-condensed { line-height: 1.25; }
+    </style>
+        
+
+{% endblock %}
+{% block body %}
+{% block scripts %}
+    {{ super() }}
+    <script src="{{url_for('generators_view.static', filename='actions.js')}}"></script>
+{% endblock %}
+{% block content %}  
+<div class="container">
+    <div class="py-5 text-center">
+<h1>Restaurant Name Generator</h1>
+</div>
+<div class="row">
+    <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Selections</h4>
+<form id="form_string_generator" name="form_string_generator" onsubmit="return generateStrings('{{getResultsEndPoint}}','form_string_generator')">
+    <div class="row">
+    <div class="col-md-6 mb-3">
+    <label for="genre">Select Restaurant Genre:</label>
+    <select id="genre" name="genre" class="form-control">
+        <option value="Italian">Italian</option>
+        <option value="Mexican">Mexican</option>
+        <!-- Add more genre options as needed -->
+    </select>
+    
+    <label for="language">Select Language:</label>
+    <select id="language" class="form-control" name="language">
+        <option value="English">English</option>
+        <option value="Chinese">Chinese</option>
+        <!-- Add more language options as needed -->
+    </select>
+    
+    <label for="font">Select Font:</label>
+    <select id="font" class="form-control" name="font">
+        <option value="Arial">Arial</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <!-- Add more font options as needed -->
+    </select>
+  
+   
+    <div class="d-block my-3">  
+        <label>Select Frequency:</label>
+        <div class="form-check">
+        <input type="radio" class="form-check-input" id="one_word" name="word_type" value="One Word" checked>
+          <label class="form-check-label" for="one_word">One Word</label>
+        </div>
+        <div class="form-check">
+          <input type="radio"   id="multiple_words" name="word_type" value="Multiple Words">
+          <label class="form-check-label"   for="multiple_words">Multiple Words</label>
+        </div>          
+    </div>
+   
+    <div class="d-block my-3">
+        <label>Select Tone:</label>
+        <div class="form-check">
+        <input type="radio" class="form-check-input"   id="serious" name="tone" value="Serious" checked>
+          <label  class="form-check-label"  for="serious">Serious</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input"   id="light_hearted" name="tone" value="Light Hearted">
+          <label  class="form-check-label"  for="light_hearted">Light Hearted</label>
+        </div>          
+    </div>
+
+    <div class="d-block my-3">
+        <label>Select Style:</label>
+        <div class="form-check">
+        <input type="radio" class="form-check-input"    id="modern" name="style" value="Modern" checked>
+          <label class="form-check-label"   for="modern">Modern</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input"   id="traditional" name="style" value="Traditional">
+          <label class="form-check-label"   for="traditional">Traditional</label>
+        </div>          
+    </div>
+
+    <button class="btn btn-primary" type="submit">Generate Name</button>
+    <div class="card">
+      <h5 class="card-title">Results:</h5>
+      <div class="card-body">
+         <p class="card-text" id="results">Run generator!</p>
+      </div>     
+    </div>
+    </div>
+    </div>
+</form>
+    </div>   
+    </div>
+  </div>
+{% endblock content %}
+
+{% endblock body %}
+
+
+
