@@ -4,7 +4,6 @@ ariadne==0.14.1
 asgiref==3.5.0
 asttokens==2.4.1
 blinker==1.7.0
-Bootstrap-Flask==2.3.3
 certifi==2023.7.22
 charset-normalizer==3.3.2
 click==8.1.7
@@ -23,7 +22,6 @@ exceptiongroup==1.2.0
 executing==2.0.1
 fastapi==0.73.0
 Flask==3.0.0
-Flask-Bootstrap==3.3.7.1
 graphql-core==3.1.7
 gunicorn==21.2.0
 h11==0.13.0
