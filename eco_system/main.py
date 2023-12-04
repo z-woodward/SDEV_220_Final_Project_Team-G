@@ -17,4 +17,4 @@ app.register_blueprint(view_generator_blueprint)
 app.register_blueprint(apis_generator_blueprint)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
