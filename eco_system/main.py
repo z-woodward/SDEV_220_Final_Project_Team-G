@@ -9,12 +9,13 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from generators.view import view_generator_blueprint
-from generators.apis import apis_generator_blueprint
+from generators.apis import Api
 
 app = Flask(__name__)
 Bootstrap(app)
+
 app.register_blueprint(view_generator_blueprint)
-app.register_blueprint(apis_generator_blueprint)
+app.register_blueprint(Api.apis_generator_blueprint)
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0')
