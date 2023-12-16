@@ -9,15 +9,30 @@ from engines import corpora_extension
 
 
 class RestaurantNameGenerator:
+    """ class for generating Restaurant Names
+    """    
     def __init__(self):
         pass
 
     def generate_name(self, genre, word_type, style, tone, additional):
+        """generate name
+
+        Args:
+            genre (_type_): string
+            word_type (_type_): string
+            style (_type_): string
+            tone (_type_): string
+            additional (_type_): string
+
+        Returns:
+            _type_: string
+        """   
+        # Determine prefix to use     
         prefixes = ["Adjective", "Noun"]
         prefix = random.choice(prefixes)
         prefix_word = ""
         addsall = ""
-
+        # fun mixin to use 
         if additional == "Moods":
             adds = corpora_extension.general["moods"]
             addsall = adds["moods"]
@@ -30,7 +45,8 @@ class RestaurantNameGenerator:
         if additional == "Occupations":
             adds = corpora_extension.general["occupationalnames"]
             addsall = adds["occupationalnames"]
-       
+        
+        # Determine prefix and mixin to use 
         if prefix == "Adjective":
             adjectives = corpora_extension.words["adjs"]            
             prefix_word = random.choice(adjectives["adjs"] + addsall)
@@ -38,7 +54,8 @@ class RestaurantNameGenerator:
         elif prefix == "Noun":
             nouns_data = corpora_extension.words["nouns"]
             prefix_word = random.choice(nouns_data["nouns"] + addsall)
-
+            
+        # Determine if one word or two word plus a prefix
         if word_type == "One Word":
             one_word = self.get_one_word(genre, style)
             result = f"{prefix_word.capitalize()} {one_word.capitalize()}"
@@ -48,7 +65,7 @@ class RestaurantNameGenerator:
                 random.choice(self.get_additional_words(genre, style))
                 for _ in range(num_words)
             ]
-
+            # Return result
             result = f"{prefix_word.capitalize()} {' '.join(additional_words_list)}"
         else:
             result = "Invalid word_type selection"
@@ -56,6 +73,15 @@ class RestaurantNameGenerator:
         return result
 
     def get_one_word(self, genre, style):
+        """get one work
+
+        Args:
+            genre (_type_): string
+            style (_type_): string
+
+        Returns:
+            _type_: string
+        """        
         categories = ["AdditionalWord"]
         selected_category = random.choice(categories)
 
