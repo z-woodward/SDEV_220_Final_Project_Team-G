@@ -35,14 +35,14 @@ class Api(object):
         generator = name_generator.RestaurantNameGenerator()
         json_data = request.json
         genre = json_data["genre"]
-        language = json_data["language"]
         word_type = json_data["word_type"]
         tone = json_data["tone"]
         style = json_data["style"]
+        additional = json_data["additional"]
 
-        if not all([genre, language, word_type, tone, style]):
+        if not all([genre,  word_type, tone, style]):
             result = "Error: All selections must be made."
         else:
-            name = generator.generate_name(genre, word_type, style)
+            name = generator.generate_name(genre, word_type, style, tone, additional)
             result = {"results": name}
             return json.dumps(result)

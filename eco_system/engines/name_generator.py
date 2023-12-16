@@ -11,27 +11,44 @@ from engines import corpora_extension
 class RestaurantNameGenerator:
     def __init__(self):
         pass
-    def generate_name(self, genre, word_type, style):       
+
+    def generate_name(self, genre, word_type, style, tone, additional):
         prefixes = ["Adjective", "Noun"]
-        prefix= random.choice(prefixes)
-        prefix_word = ""        
+        prefix = random.choice(prefixes)
+        prefix_word = ""
+        addsall = ""
+
+        if additional == "Moods":
+            adds = corpora_extension.general["moods"]
+            addsall = adds["moods"]
+        if additional == "Honorifics":
+            adds = corpora_extension.general["honorifics"]
+            addsall = adds["honorifics"]
+        if additional == "Flowers":
+            adds = corpora_extension.general["flowers"]
+            addsall = adds["flowers"]
+        if additional == "Occupations":
+            adds = corpora_extension.general["occupationalnames"]
+            addsall = adds["occupationalnames"]
+       
         if prefix == "Adjective":
-            adjectives = corpora_extension.words['adjs']
-            prefix_word=  random.choice(adjectives['adjs'])
+            adjectives = corpora_extension.words["adjs"]            
+            prefix_word = random.choice(adjectives["adjs"] + addsall)
+
         elif prefix == "Noun":
-            nouns_data = corpora_extension.words['nouns']
-            prefix_word = random.choice(nouns_data['nouns'])
-        
+            nouns_data = corpora_extension.words["nouns"]
+            prefix_word = random.choice(nouns_data["nouns"] + addsall)
+
         if word_type == "One Word":
-            one_word = self.get_one_word(genre,style)
+            one_word = self.get_one_word(genre, style)
             result = f"{prefix_word.capitalize()} {one_word.capitalize()}"
         elif word_type == "Multiple Words":
             num_words = random.randint(1, 2)  # Adjust the range as needed
             additional_words_list = [
-                random.choice(self.get_additional_words(genre,style))
+                random.choice(self.get_additional_words(genre, style))
                 for _ in range(num_words)
-            ]  
-               
+            ]
+
             result = f"{prefix_word.capitalize()} {' '.join(additional_words_list)}"
         else:
             result = "Invalid word_type selection"
@@ -39,16 +56,16 @@ class RestaurantNameGenerator:
         return result
 
     def get_one_word(self, genre, style):
-        categories = ["Adjective", "Noun", "AdditionalWord"]
+        categories = ["AdditionalWord"]
         selected_category = random.choice(categories)
 
         if selected_category == "Adjective":
-            adjectives = corpora_extension.words['adjs']
-            return random.choice(adjectives['adjs'])
+            adjectives = corpora_extension.words["adjs"]
+            return random.choice(adjectives["adjs"])
         elif selected_category == "Noun":
-            nouns_data = corpora_extension.words['nouns']
-            return random.choice(nouns_data['nouns'])
-            
+            nouns_data = corpora_extension.words["nouns"]
+            return random.choice(nouns_data["nouns"])
+
         elif selected_category == "AdditionalWord":
             return random.choice(self.get_additional_words(genre, style))
 
@@ -64,17 +81,19 @@ class RestaurantNameGenerator:
             _type_: string
         """
         additional_words = []
+
         if genre == "Italian":
             data = corpora_extension.culture["italian"]
             additional_words.extend(data["italian"])
-        elif genre == "Asian":
+        elif genre == "Chinese":
             data = corpora_extension.culture["chinese"]
             additional_words.extend(data["chinese"])
         elif genre == "Mexican":
             data = corpora_extension.culture["mexican"]
             additional_words.extend(data["mexican"])
         elif genre == "American":
-            additional_words.extend(["Burger", "Diner", "Grill", "Barbecue"])
+            american = corpora_extension.general["restaurantsuffix"]
+            additional_words.extend(american["restaurant_suffix"])
         if style == "Modern":
             additional_words.extend(["Fusion", "Express", "Hub", "Lounge"])
         elif style == "Traditional":
