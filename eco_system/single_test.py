@@ -5,6 +5,7 @@
 @Purpose:Donald Osgood
 """
 from engines import name_generator
+from engines import corpora_extension 
 
 
 class TestSuite(object):
@@ -16,7 +17,13 @@ class TestSuite(object):
         res_generator = name_generator.RestaurantNameGenerator()
         value = res_generator.get_one_word("", "", "")
         print(value)
+        
+    def run_dictionary_test(self):    
+        data = corpora_extension.words['adjs']
+        print(data)
+        
 
 if __name__ == "__main__":
     test_suite = TestSuite()
     test_suite.run_generator_test()
+    test_suite.run_dictionary_test()

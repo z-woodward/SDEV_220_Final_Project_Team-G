@@ -43,6 +43,6 @@ class Api(object):
         if not all([genre, language, word_type, tone, style]):
             result = "Error: All selections must be made."
         else:
-            name = generator.generate_name(genre, language, word_type, tone, style)
+            name = generator.generate_name(genre, word_type, style)
             result = {"results": name}
             return json.dumps(result)
