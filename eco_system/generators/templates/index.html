@@ -2,7 +2,7 @@
   @Author: Donald Osgood
   @Date:   2023-11-22 22:26:55
   @Last Modified by:   Donald Osgood
-  @Last Modified time: 2023-12-04 00:15:12
+  @Last Modified time: 2023-12-15 22:13:06
 -->
 <!-- HTML template -->
 <!-- templates/index.html -->
@@ -19,6 +19,7 @@
         .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
         
         .lh-condensed { line-height: 1.25; }
+        
     </style>
         
 
@@ -43,23 +44,10 @@
     <select id="genre" name="genre" class="form-control">
         <option value="Italian">Italian</option>
         <option value="Mexican">Mexican</option>
-        <!-- Add more genre options as needed -->
-    </select>
-    
-    <label for="language">Select Language:</label>
-    <select id="language" class="form-control" name="language">
-        <option value="English">English</option>
+        <option value="American">American</option>
         <option value="Chinese">Chinese</option>
-        <!-- Add more language options as needed -->
-    </select>
-    
-    <label for="font">Select Font:</label>
-    <select id="font" class="form-control" name="font">
-        <option value="Arial">Arial</option>
-        <option value="Times New Roman">Times New Roman</option>
-        <!-- Add more font options as needed -->
-    </select>
-  
+        <!-- Add more genre options as needed -->
+    </select>  
    
     <div class="d-block my-3">  
         <label>Select Frequency:</label>
@@ -96,6 +84,26 @@
           <label class="form-check-label"   for="traditional">Traditional</label>
         </div>          
     </div>
+
+    <div class="d-block my-3">
+      <label>Select Additional:</label>
+      <div class="form-check">
+      <input type="radio" class="form-check-input"    id="Moods" name="additional" value="Moods" checked>
+        <label class="form-check-label"   for="Moods">Moods</label>
+      </div>
+      <div class="form-check">
+        <input type="radio" class="form-check-input"   id="Honorifics" name="additional" value="Honorifics">
+        <label class="form-check-label"   for="Honorifics">Honorifics</label>
+      </div>      
+      <div class="form-check">
+        <input type="radio" class="form-check-input"   id="Flowers" name="additional" value="Flowers">
+        <label class="form-check-label"   for="Flowers">Flowers</label>
+      </div>    
+      <div class="form-check">
+        <input type="radio" class="form-check-input"   id="Occupations" name="additional" value="Occupations">
+        <label class="form-check-label"   for="Occupations">Occupations</label>
+      </div>    
+  </div>
 
     <button class="btn btn-primary" type="submit">Generate Name</button>
     <div class="card">
